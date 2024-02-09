@@ -4,7 +4,7 @@
  * @see https://github.com/GoogleChrome/web-vitals
  */
 import {useEffect} from 'react';
-import {getCLS, getFID, getLCP, getTTFB} from 'web-vitals';
+import {onLCP, onFID, onCLS, onTTFB} from 'web-vitals';
 
 type Props = {
   showStatusInConsoleLog: boolean;
@@ -57,10 +57,10 @@ type Props = {
 const WebVitals = ({showStatusInConsoleLog}: Props) => {
   useEffect(() => {
     if (showStatusInConsoleLog) {
-      getTTFB(console.log);
-      getCLS(console.log);
-      getFID(console.log);
-      getLCP(console.log);
+      onTTFB(console.log);
+      onCLS(console.log);
+      onFID(console.log);
+      onLCP(console.log);
     }
   }, [showStatusInConsoleLog]);
 
