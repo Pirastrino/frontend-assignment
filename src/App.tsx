@@ -1,26 +1,17 @@
-import {Helmet} from 'react-helmet-async';
-import {useTranslation} from 'react-i18next';
-import {Welcome} from './pages/Welcome';
+import {BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom';
+import {NewTask, Login, OverView, TaskForm} from './pages';
 
-function App() {
-  const {i18n, t} = useTranslation();
-
-  return (
-    <>
-      <Helmet
-        titleTemplate={`%s - ${t('app.title')}`}
-        defaultTitle={t('app.title')}
-        htmlAttributes={{lang: i18n.language}}
-      >
-        <meta name="description" content={t('app.description')} />
-      </Helmet>
-
-      {/**
-       * start from here
-       */}
-      <Welcome />
-    </>
-  );
-}
+const App = () => (
+  <Router>
+    <Routes>
+      {/* implement auth */}
+      <Route path="/" element={<Navigate to="/login" replace={true} />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/overview" element={<OverView />} />
+      <Route path="/new_task" element={<NewTask />} />
+      <Route path="/task/:id" element={<TaskForm />} />
+    </Routes>
+  </Router>
+);
 
 export default App;
