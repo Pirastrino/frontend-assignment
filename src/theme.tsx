@@ -3,6 +3,11 @@ import defaultTheme from '@chakra-ui/theme';
 
 const {components} = defaultTheme;
 
+const fonts = {
+  body: 'Inter, sans-serif',
+  heading: 'Inter, sans-serif',
+};
+
 const fontSizes = {
   heading: {
     1: '28px',
@@ -49,6 +54,24 @@ const theme = extendTheme({
     'border-danger': '#E32C1E',
   },
   components: {
+    Text: {
+      baseStyle: {
+        color: 'text-primary',
+      },
+      variants: {
+        secondary: {
+          color: 'text-secondary',
+        },
+        tertiary: {
+          color: 'text-tertiary',
+        },
+      },
+    },
+    Heading: {
+      baseStyle: {
+        color: 'text-primary',
+      },
+    },
     Button: {
       baseStyle: () => ({
         bg: 'unset',
@@ -68,6 +91,7 @@ const theme = extendTheme({
       },
     },
   },
+  fonts,
   fontSizes,
   fontWeights,
 });
