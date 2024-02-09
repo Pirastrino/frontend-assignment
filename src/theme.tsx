@@ -1,6 +1,9 @@
 import {extendTheme} from '@chakra-ui/react';
 import defaultTheme from '@chakra-ui/theme';
 
+import type {StyleFunctionProps} from '@chakra-ui/theme-tools';
+import {head} from 'cypress/types/lodash';
+
 const {components} = defaultTheme;
 
 const fonts = {
@@ -32,6 +35,19 @@ const fontWeights = {
   },
 };
 
+const input = {
+  border: '1px solid',
+  borderColor: 'border-gray',
+  borderRadius: 'base',
+  _hover: {
+    borderColor: 'border-brand',
+  },
+  _focus: {
+    borderColor: 'border-brand',
+    boxShadow: '0px 0px 0px 4px var(--chakra-colors-border-shadow)',
+  },
+};
+
 const theme = extendTheme({
   config: {initialColorMode: 'light', useSystemColorMode: false},
   colors: {
@@ -52,6 +68,7 @@ const theme = extendTheme({
     'border-brand': '#0F62FE',
     'border-gray': '#CAD1DE',
     'border-danger': '#E32C1E',
+    'border-shadow': 'rgba(15, 98, 254, 0.2)', // transparentize from @chakra-ui/theme-tools is deprecated
   },
   sizes: {
     ...defaultTheme.sizes,
@@ -81,12 +98,18 @@ const theme = extendTheme({
       },
     },
     Button: {
-      baseStyle: () => ({
+      baseStyle: {
+        ...components.Button.baseStyle,
         bg: 'unset',
-        backgroundColor: '#0F62FE',
-        color: '#FFFFFF',
-        borderRadius: '100px',
-      }),
+        backgroundColor: 'fill-brand',
+        fontWeight: 'normal',
+        color: 'text-white',
+        borderRadius: 'full',
+        _hover: {
+          bg: 'unset',
+          backgroundColor: 'fill-brand-hover',
+        },
+      },
     },
     Card: {
       baseStyle: {
@@ -96,6 +119,57 @@ const theme = extendTheme({
           borderRadius: '1.25rem',
           padding: '2.5rem',
         },
+        body: {
+          ...components.Card.baseStyle?.header,
+          paddingTop: '2.5rem',
+        },
+        footer: {
+          ...components.Card.baseStyle?.footer,
+          paddingTop: '2.5rem',
+        },
+      },
+    },
+    FormLabel: {
+      baseStyle: {
+        color: 'text-secondary',
+        fontSize: 'small',
+      },
+    },
+    FormHelperText: {
+      baseStyle: {
+        color: 'text-tertiary',
+        fontSize: 'small',
+      },
+    },
+    Input: {
+      baseStyle: {
+        field: {
+          ...defaultTheme.components.Input.baseStyle?.field,
+          px: defaultTheme.space[4],
+          py: defaultTheme.space[3],
+        },
+      },
+      variants: {
+        outline: (props: StyleFunctionProps) => ({
+          ...defaultTheme.components.Input.variants?.outline,
+          field: {
+            ...defaultTheme.components.Input.variants?.outline(props).field,
+            ...input,
+          },
+        }),
+      },
+    },
+    Textarea: {
+      baseStyle: {
+        ...defaultTheme.components.Textarea.baseStyle,
+        px: defaultTheme.space[4],
+        py: defaultTheme.space[4],
+      },
+      variants: {
+        outline: (props: StyleFunctionProps) => ({
+          ...defaultTheme.components.Textarea.variants?.outline(props),
+          ...input,
+        }),
       },
     },
   },
