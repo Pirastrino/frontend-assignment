@@ -16,7 +16,7 @@ Then open [http://localhost:3000](http://localhost:3000/) to see your app.<br>
 
 ---
 
-![Alt text](./src/asserts/readme/banner.png)
+![Alt text](./src/assets/readme/banner.png)
 
 **Your task will be to write a `To-Do app`.** <br/>
 You might think a to-do list isn't a challenge, and
