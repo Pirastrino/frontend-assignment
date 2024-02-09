@@ -53,6 +53,14 @@ const theme = extendTheme({
     'border-gray': '#CAD1DE',
     'border-danger': '#E32C1E',
   },
+  sizes: {
+    ...defaultTheme.sizes,
+    topbar: {
+      base: '5.5rem',
+      md: '7rem',
+      'logo-boxSize': '2rem',
+    },
+  },
   components: {
     Text: {
       baseStyle: {
