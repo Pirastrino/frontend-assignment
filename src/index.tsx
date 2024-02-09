@@ -2,8 +2,9 @@ import {ChakraProvider} from '@chakra-ui/react';
 import {StrictMode} from 'react';
 import {createRoot} from 'react-dom/client';
 import {HelmetProvider} from 'react-helmet-async';
+import {Normalize} from 'styled-normalize';
+
 import App from './App';
-import GlobalStyles from './GlobalStyles';
 import WebVitals from './WebVitals';
 import './i18n/i18n';
 import theme from './theme';
@@ -15,7 +16,7 @@ createRoot(MOUNT_NODE!).render(
     <ChakraProvider theme={theme} resetCSS>
       <HelmetProvider>
         <App />
-        <GlobalStyles />
+        <Normalize />
         <WebVitals showStatusInConsoleLog />
       </HelmetProvider>
     </ChakraProvider>
