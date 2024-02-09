@@ -1,3 +1,5 @@
-const Login = () => <div>Login</div>;
+import {Layout} from '../components';
+
+const Login = () => <Layout>Login</Layout>;
 
 export default Login;

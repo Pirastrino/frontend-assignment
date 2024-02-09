@@ -1,4 +1,7 @@
 import {extendTheme} from '@chakra-ui/react';
+import defaultTheme from '@chakra-ui/theme';
+
+const {components} = defaultTheme;
 
 const fontSizes = {
   heading: {
@@ -53,6 +56,16 @@ const theme = extendTheme({
         color: '#FFFFFF',
         borderRadius: '100px',
       }),
+    },
+    Card: {
+      baseStyle: {
+        ...components.Card.baseStyle,
+        container: {
+          ...components.Card.baseStyle?.container,
+          borderRadius: '1.25rem',
+          padding: '2.5rem',
+        },
+      },
     },
   },
   fontSizes,

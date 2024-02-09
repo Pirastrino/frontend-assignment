@@ -1,3 +1,5 @@
-const NewTask = () => <div>NewTask</div>;
+import {Layout} from '../components';
+
+const NewTask = () => <Layout>NewTask</Layout>;
 
 export default NewTask;
