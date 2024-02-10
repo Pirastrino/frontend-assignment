@@ -9,7 +9,11 @@
   "formTask.title": "New task",
   "formTask.label.name": "Task name",
   "formTask.label.description": "Description (Optional)",
-  "formTask.addTask": "Create task",
-  "formTask.editTask": "Save changes",
-  "formTask.discard": "Discard"
+  "formTask.btn.addTask": "Create task",
+  "formTask.btn.editTask": "Save changes",
+  "formTask.btn.discard": "Discard",
+  "overview.hello": "Hello",
+  "overview.title": "You are amazing!",
+  "overview.noMoreTasks": "You have no more tasks to do.",
+  "overview.btn.addTask": "Add task"
 }

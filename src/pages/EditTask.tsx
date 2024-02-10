@@ -14,8 +14,8 @@ const EditTask: React.FC = () => {
     <Layout>
       <FormTask
         title={`Edit task: ${id}`} //  TODO: replace with the actual task title
-        submitLabel={t('formTask.editTask')}
-        discardLabel={t('formTask.discard')}
+        submitLabel={t('formTask.btn.editTask')}
+        discardLabel={t('formTask.btn.discard')}
         values={formData}
         errors={errors}
         onChange={handleChange}

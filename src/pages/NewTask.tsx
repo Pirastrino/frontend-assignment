@@ -11,8 +11,8 @@ const NewTask: React.FC = () => {
     <Layout>
       <FormTask
         title={t('formTask.title')}
-        submitLabel={t('formTask.addTask')}
-        discardLabel={t('formTask.discard')}
+        submitLabel={t('formTask.btn.addTask')}
+        discardLabel={t('formTask.btn.discard')}
         values={formData}
         errors={errors}
         onChange={handleChange}
