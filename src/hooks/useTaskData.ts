@@ -1,7 +1,8 @@
 import {useState} from 'react';
 import {ZodError} from 'zod';
 
-import {taskData, TaskData as FormData} from '../components/FormTask';
+import {taskData} from '../validations';
+import {TaskFormData} from '../types';
 
 const initialTaskData = {
   name: '',
@@ -13,8 +14,8 @@ const getTask = (id?: number) => (id ? initialTaskData : initialTaskData);
 
 const useTaskData = (id?: number) => {
   const initialTaskData = getTask(id);
-  const [formData, setFormData] = useState<FormData>(initialTaskData);
-  const [errors, setErrors] = useState<FormData>(initialTaskData);
+  const [formData, setFormData] = useState<TaskFormData>(initialTaskData);
+  const [errors, setErrors] = useState<TaskFormData>(initialTaskData);
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (e) => {
     const {name, value} = e.currentTarget;

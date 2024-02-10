@@ -14,25 +14,18 @@ import {
   Spacer,
   VStack,
 } from '@chakra-ui/react';
-import z from 'zod';
 
 import FormInput from './FormInput';
+import {TaskFormData} from '../types';
 
 import {ReactComponent as IconForward} from '../assets/icons/icon-forward.svg';
-
-export const taskData = z.object({
-  name: z.string().min(3, 'Task name must be at least 3 characters'),
-  description: z.string(),
-});
-
-export type TaskData = z.infer<typeof taskData>;
 
 type Props = {
   title: string;
   submitLabel: string;
   discardLabel: string;
-  values: TaskData;
-  errors: TaskData;
+  values: TaskFormData;
+  errors: TaskFormData;
   onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   onReset: () => void;
