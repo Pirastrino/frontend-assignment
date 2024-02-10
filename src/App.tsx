@@ -1,5 +1,5 @@
 import {BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom';
-import {NewTask, Login, OverView, TaskForm} from './pages';
+import {NewTask, Login, OverView, EditTask} from './pages';
 
 const App = () => (
   <Router>
@@ -9,7 +9,7 @@ const App = () => (
       <Route path="/login" element={<Login />} />
       <Route path="/overview" element={<OverView />} />
       <Route path="/new_task" element={<NewTask />} />
-      <Route path="/task/:id" element={<TaskForm />} />
+      <Route path="/task/:id" element={<EditTask />} />
     </Routes>
   </Router>
 );
