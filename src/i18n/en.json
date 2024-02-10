@@ -5,5 +5,10 @@
   "welcome.message": "Welcome to Carvago Front-End Assignment",
   "login.title": "It’s good to have you back!",
   "login.description": "Welcome to our secure portal! To access the full functionality of our app, kindly provide your credentials below. Your privacy is our priority.",
-  "login.submit": "Login"
+  "login.submit": "Login",
+  "formTask.title": "New task",
+  "formTask.label.name": "Task name",
+  "formTask.label.description": "Description (Optional)",
+  "formTask.addTask": "Add task",
+  "formTask.discard": "Discard"
 }

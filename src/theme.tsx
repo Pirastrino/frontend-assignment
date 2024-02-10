@@ -110,6 +110,18 @@ const theme = extendTheme({
           backgroundColor: 'fill-brand-hover',
         },
       },
+      variants: {
+        ghost: {
+          ...components.Button.variants?.ghost,
+          backgroundColor: 'fill-gray',
+          _hover: {
+            backgroundColor: 'fill-gray-hover',
+          },
+          _active: {
+            backgroundColor: 'fill-gray-hover',
+          },
+        },
+      },
     },
     Card: {
       baseStyle: {
