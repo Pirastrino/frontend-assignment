@@ -16,7 +16,7 @@ const NewTask: React.FC = () => {
         values={formData}
         errors={errors}
         onChange={handleChange}
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit('add')}
         onReset={handleReset}
       />
     </Layout>

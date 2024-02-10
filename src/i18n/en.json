@@ -17,5 +17,7 @@
   "overview.noMoreTasks": "You have no more tasks to do.",
   "overview.btn.addTask": "Add task",
   "overview.todo.title": "To-do",
-  "overview.done.title": "Completed"
+  "overview.done.title": "Completed",
+  "taskMenu.edit": "Edit",
+  "taskMenu.delete": "Delete"
 }

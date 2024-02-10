@@ -1,6 +1,6 @@
-import {useState} from 'react';
-import {Link as ReactRouterLink} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
+import {useStore} from '@nanostores/react';
+import {Link as ReactRouterLink} from 'react-router-dom';
 import {
   Button,
   CardBody,
@@ -16,60 +16,22 @@ import {
 } from '@chakra-ui/react';
 
 import {Layout, Task as TaskItem} from '../components';
+import {$tasks, toggleTaskCompleted} from '../store';
 import {formatDate} from '../utils';
 
 import logoBg from '../assets/logo-bg.svg';
-import {Task} from '../types';
-
-const tasks: Task[] = [
-  {
-    id: 1,
-    name: 'Task 1',
-    description: 'Description 1',
-    completed: false,
-  },
-  {
-    id: 2,
-    name: 'Task 2',
-    description: 'Description 2',
-    completed: true,
-  },
-  {
-    id: 3,
-    name: 'Task 3',
-    description: 'Description 3',
-    completed: false,
-  },
-  {
-    id: 4,
-    name: 'Task 4',
-    description: 'Description 4',
-    completed: true,
-  },
-];
 
 export const Welcome = () => {
-  // TODO: Replace with local storage
-  const [store, setStore] = useState(tasks);
   const {t} = useTranslation();
+  const tasks = useStore($tasks);
 
   const name = 'Anette';
   const welcome = `${t('overview.hello')} ${name}!`;
 
-  const todo = store.filter((task) => !task.completed);
-  const done = store.filter((task) => task.completed);
+  const todo = tasks.filter((task) => !task.completed);
+  const done = tasks.filter((task) => task.completed);
 
   const allDone = todo.length === 0;
-
-  const toggleCompleted = (id: Task['id']) => () =>
-    setStore((prev) =>
-      prev.map((task) => {
-        if (task.id === id) {
-          return {...task, completed: !task.completed};
-        }
-        return task;
-      })
-    );
 
   return (
     <Layout>
@@ -104,7 +66,7 @@ export const Welcome = () => {
                 <TaskItem
                   {...taskData}
                   key={`task-${taskData.id}`}
-                  onChange={toggleCompleted(taskData.id)}
+                  onChange={() => toggleTaskCompleted(taskData.id)}
                 />
               ))}
             </VStack>
@@ -117,7 +79,7 @@ export const Welcome = () => {
                 <TaskItem
                   {...taskData}
                   key={`task-${taskData.id}`}
-                  onChange={toggleCompleted(taskData.id)}
+                  onChange={() => toggleTaskCompleted(taskData.id)}
                 />
               ))}
             </VStack>
