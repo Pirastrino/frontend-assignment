@@ -15,5 +15,7 @@
   "overview.hello": "Hello",
   "overview.title": "You are amazing!",
   "overview.noMoreTasks": "You have no more tasks to do.",
-  "overview.btn.addTask": "Add task"
+  "overview.btn.addTask": "Add task",
+  "overview.todo.title": "To-do",
+  "overview.done.title": "Completed"
 }

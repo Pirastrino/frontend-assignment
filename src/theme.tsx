@@ -2,7 +2,6 @@ import {extendTheme} from '@chakra-ui/react';
 import defaultTheme from '@chakra-ui/theme';
 
 import type {StyleFunctionProps} from '@chakra-ui/theme-tools';
-import {head} from 'cypress/types/lodash';
 
 const {components} = defaultTheme;
 
@@ -140,6 +139,29 @@ const theme = extendTheme({
           paddingTop: '2.5rem',
         },
       },
+    },
+    Checkbox: {
+      baseStyle: (props: StyleFunctionProps) => ({
+        ...components.Checkbox.baseStyle,
+        control: {
+          ...components.Checkbox.baseStyle?.(props).control,
+          boxSize: '2rem',
+          borderRadius: 'full',
+          borderColor: 'border-gray',
+          _hover: {
+            boxShadow: '0px 0px 0px 4px var(--chakra-colors-border-shadow)',
+          },
+          _checked: {
+            ...components.Checkbox.baseStyle?.(props).control?._checked,
+            borderColor: 'border-brand',
+            backgroundColor: 'fill-brand',
+            _hover: {
+              borderColor: 'border-brand',
+              backgroundColor: 'fill-brand',
+            },
+          },
+        },
+      }),
     },
     FormLabel: {
       baseStyle: {
