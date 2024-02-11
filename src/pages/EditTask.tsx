@@ -28,6 +28,7 @@ const EditTask: React.FC = () => {
     if (id) {
       updateTask(id, {
         id,
+        userId: task.userId,
         name: formData.name,
         description: formData.description ?? '',
         completed: task?.completed ?? false,

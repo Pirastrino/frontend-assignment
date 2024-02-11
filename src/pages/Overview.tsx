@@ -1,5 +1,4 @@
 import {useTranslation} from 'react-i18next';
-import {useStore} from '@nanostores/react';
 import {Link as ReactRouterLink} from 'react-router-dom';
 import {
   Button,
@@ -16,20 +15,18 @@ import {
 } from '@chakra-ui/react';
 
 import {Layout, Task as TaskItem} from '../components';
-import {$tasks, toggleTaskCompleted} from '../stores';
+import {$user, getUserTasks, toggleTaskCompleted} from '../stores';
 import {formatDate} from '../utils';
+import {MISSING_TEXT} from '../constants';
 
 import logoBg from '../assets/logo-bg.svg';
 
 export const Welcome = () => {
   const {t} = useTranslation();
-  const tasks = useStore($tasks);
+  const user = $user.get();
+  const {todo, done} = getUserTasks();
 
-  const name = 'Anette';
-  const welcome = `${t('overview.hello')} ${name}!`;
-
-  const todo = tasks.filter((task) => !task.completed);
-  const done = tasks.filter((task) => task.completed);
+  const welcome = `${t('overview.hello')} ${user?.firstName ?? MISSING_TEXT}!`;
 
   const allDone = todo.length === 0;
 

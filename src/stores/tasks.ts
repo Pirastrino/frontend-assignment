@@ -1,3 +1,4 @@
+import {useStore} from '@nanostores/react';
 import {persistentAtom} from '@nanostores/persistent';
 
 import {Task} from '../types';
@@ -38,3 +39,12 @@ export const updateTask = (id: Task['id'], task: Task) => {
 };
 
 export const getTask = (id?: Task['id']) => $tasks.get().find((task) => task.id === id);
+
+export const getUserTasks = () => {
+  const tasks = useStore($tasks);
+
+  return {
+    todo: tasks.filter((task) => !task.completed),
+    done: tasks.filter((task) => task.completed),
+  };
+};

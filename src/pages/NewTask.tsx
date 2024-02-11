@@ -4,7 +4,7 @@ import {useTranslation} from 'react-i18next';
 import {FormTask, Layout} from '../components';
 import {taskData} from '../validations';
 import {useForm} from '../hooks';
-import {addTask} from '../stores';
+import {$user, addTask} from '../stores';
 
 const NewTask: React.FC = () => {
   const {t} = useTranslation();
@@ -18,12 +18,17 @@ const NewTask: React.FC = () => {
   });
 
   const onSubmit = async (formData: typeof values) => {
-    addTask({
-      id: new Date().getTime(),
-      name: formData.name,
-      description: formData.description ?? '',
-      completed: false,
-    });
+    const userId = $user.get()?.id;
+
+    if (userId) {
+      addTask({
+        id: new Date().getTime(),
+        userId,
+        name: formData.name,
+        description: formData.description ?? '',
+        completed: false,
+      });
+    }
     navigate('/overview');
   };
 
