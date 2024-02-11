@@ -19,5 +19,8 @@
   "overview.todo.title": "To-do",
   "overview.done.title": "Completed",
   "taskMenu.edit": "Edit",
-  "taskMenu.delete": "Delete"
+  "taskMenu.delete": "Delete",
+  "userMenu.logout": "Logout",
+  "userMenu.clearCompleted": "Clear completed",
+  "userMenu.clearAll": "Clear all"
 }
