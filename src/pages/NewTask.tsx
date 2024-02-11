@@ -1,5 +1,6 @@
 import {useNavigate} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
+import {useStore} from '@nanostores/react';
 
 import {FormTask, Layout} from '../components';
 import {taskData} from '../validations';
@@ -9,6 +10,7 @@ import {$user, addTask} from '../stores';
 const NewTask: React.FC = () => {
   const {t} = useTranslation();
   const navigate = useNavigate();
+  const user = useStore($user);
   const {values, errors, handleChange, handleSubmit, reset} = useForm({
     validationSchema: taskData,
     initialValues: {
@@ -18,7 +20,7 @@ const NewTask: React.FC = () => {
   });
 
   const onSubmit = async (formData: typeof values) => {
-    const userId = $user.get()?.id;
+    const userId = user?.id;
 
     if (userId) {
       addTask({
