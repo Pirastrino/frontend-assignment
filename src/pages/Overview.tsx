@@ -8,8 +8,8 @@ import {
   Divider,
   Flex,
   Heading,
+  Icon,
   Image,
-  Link,
   Spacer,
   Text,
   VStack,
@@ -20,6 +20,7 @@ import {$tasks, $user, toggleTaskCompleted} from '../stores';
 import {formatDate} from '../utils';
 import {MISSING_TEXT} from '../constants';
 
+import {ReactComponent as IconAdd} from '../assets/icons/icon-add.svg';
 import logoBg from '../assets/logo-bg.svg';
 
 export const Welcome = () => {
@@ -43,10 +44,12 @@ export const Welcome = () => {
             <Text color="text-secondary">{formatDate(new Date())}</Text>
           </VStack>
           <Spacer />
-          <Button>
-            <Link as={ReactRouterLink} to="/new_task" w="full">
-              {t('overview.btn.addTask')}
-            </Link>
+          <Button
+            as={ReactRouterLink}
+            to="/new_task"
+            rightIcon={<Icon as={IconAdd} fill="text-white" />}
+          >
+            {t('overview.btn.addTask')}
           </Button>
         </Flex>
       </CardHeader>

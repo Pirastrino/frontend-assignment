@@ -29,13 +29,13 @@ const TaskMenu: React.FC<Props> = ({id}) => {
       </MenuButton>
       <MenuList>
         <MenuItem
-          icon={<Icon as={IconEdit} fill="fill-darkBlue" />}
+          icon={<Icon as={IconEdit} fill="fill-darkBlue" boxSize={4} display="flex" />}
           onClick={() => navigate(`/task/${id}`)}
         >
           {t('taskMenu.edit')}
         </MenuItem>
         <MenuItem
-          icon={<Icon as={IconDelete} fill="text-danger" />}
+          icon={<Icon as={IconDelete} fill="text-danger" boxSize={4} display="flex" />}
           color="text-danger"
           onClick={() => removeTask(id)}
         >

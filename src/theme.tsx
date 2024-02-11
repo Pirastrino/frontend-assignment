@@ -104,7 +104,13 @@ const theme = extendTheme({
         fontWeight: 'normal',
         color: 'text-white',
         borderRadius: 'full',
+        padding: '0.375rem 1.25rem',
         _hover: {
+          ...components.Button.baseStyle?._hover,
+          bg: 'unset',
+          backgroundColor: 'fill-brand-hover',
+        },
+        _active: {
           bg: 'unset',
           backgroundColor: 'fill-brand-hover',
         },
@@ -127,16 +133,16 @@ const theme = extendTheme({
         ...components.Card.baseStyle,
         container: {
           ...components.Card.baseStyle?.container,
-          borderRadius: '1.25rem',
-          padding: '2.5rem',
+          borderRadius: '1.5rem',
+          padding: {base: '1.5rem', md: '2.5rem'},
         },
         body: {
           ...components.Card.baseStyle?.header,
-          paddingTop: '2.5rem',
+          paddingTop: {base: '1.5rem', md: '2.5rem'},
         },
         footer: {
           ...components.Card.baseStyle?.footer,
-          paddingTop: '2.5rem',
+          paddingTop: {base: '1.5rem', md: '2.5rem'},
         },
       },
     },
@@ -191,6 +197,20 @@ const theme = extendTheme({
             ...input,
           },
         }),
+      },
+    },
+    Menu: {
+      ...defaultTheme.components.Menu.baseStyle?.button,
+      baseStyle: {
+        ...defaultTheme.components.Menu.baseStyle,
+        item: {
+          ...defaultTheme.components.Menu.baseStyle?.item,
+          height: '2.25rem',
+          color: 'text-primary',
+          _hover: {
+            backgroundColor: 'fill-gray-lightest',
+          },
+        },
       },
     },
     Textarea: {
