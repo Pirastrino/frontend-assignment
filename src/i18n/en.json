@@ -22,5 +22,7 @@
   "taskMenu.delete": "Delete",
   "userMenu.logout": "Logout",
   "userMenu.clearCompleted": "Clear completed",
-  "userMenu.clearAll": "Clear all"
+  "userMenu.clearAll": "Clear all",
+  "task404.title": "Task not found!",
+  "task404.btn.back": "Back to overview"
 }
