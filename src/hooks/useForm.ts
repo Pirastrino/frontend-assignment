@@ -8,7 +8,10 @@ type Props<T> = {
 
 const useForm = <T extends object>({validationSchema, initialValues}: Props<T>) => {
   const [values, setValues] = useState(initialValues);
-  const [errors, setErrors] = useState(initialValues);
+  const [errors, setErrors] = useState(
+    // TODO: extract to getInitialErrors util function
+    Object.keys(initialValues).reduce((acc, key) => ({...acc, [key]: ''}), initialValues)
+  );
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (e) => {
     const {name, value} = e.currentTarget;
@@ -34,7 +37,7 @@ const useForm = <T extends object>({validationSchema, initialValues}: Props<T>) 
       } catch (e) {
         if (e instanceof ZodError) {
           setErrors(
-            // TODO extract to the getErrors util function
+            // TODO: extract to the getErrors util function
             Object.keys(errors).reduce(
               (acc, key) => ({
                 ...acc,

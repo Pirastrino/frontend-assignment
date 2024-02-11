@@ -1,11 +1,31 @@
+import {useNavigate} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
-import {useTaskData} from '../hooks';
 
 import {FormTask, Layout} from '../components';
+import {taskData} from '../validations';
+import {useForm} from '../hooks';
+import {addTask} from '../store';
 
 const NewTask: React.FC = () => {
   const {t} = useTranslation();
-  const {formData, errors, handleChange, handleSubmit, handleReset} = useTaskData();
+  const navigate = useNavigate();
+  const {values, errors, handleChange, handleSubmit, reset} = useForm({
+    validationSchema: taskData,
+    initialValues: {
+      name: '',
+      description: '',
+    },
+  });
+
+  const onSubmit = async (formData: typeof values) => {
+    addTask({
+      id: new Date().getTime(),
+      name: formData.name,
+      description: formData.description ?? '',
+      completed: false,
+    });
+    navigate('/overview');
+  };
 
   return (
     <Layout>
@@ -13,11 +33,11 @@ const NewTask: React.FC = () => {
         title={t('formTask.title')}
         submitLabel={t('formTask.btn.addTask')}
         discardLabel={t('formTask.btn.discard')}
-        values={formData}
+        values={values}
         errors={errors}
         onChange={handleChange}
-        onSubmit={handleSubmit('add')}
-        onReset={handleReset}
+        onSubmit={handleSubmit(onSubmit)}
+        onReset={reset}
       />
     </Layout>
   );
