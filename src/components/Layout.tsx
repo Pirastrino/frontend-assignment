@@ -1,5 +1,5 @@
 import {useEffect} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 import {Helmet} from 'react-helmet-async';
 import {Box, Card, CardProps, Container} from '@chakra-ui/react';
@@ -15,12 +15,18 @@ type Props = CardProps & {
 const Layout: React.FC<Props> = ({children, ...cardProps}) => {
   const {i18n, t} = useTranslation();
   const navigate = useNavigate();
+  const {pathname} = useLocation();
 
   useEffect(() => {
     // TODO: implement token expiration so that it does not tries to validate token on every page load
     const token = $user.get()?.token;
 
     validateToken(token, {
+      onSuccess: () => {
+        if (pathname === '/login') {
+          navigate('/overview');
+        }
+      },
       onError: () => {
         navigate('/login');
       },
