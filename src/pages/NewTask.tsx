@@ -4,7 +4,7 @@ import {useTranslation} from 'react-i18next';
 import {FormTask, Layout} from '../components';
 import {taskData} from '../validations';
 import {useForm} from '../hooks';
-import {addTask} from '../store';
+import {addTask} from '../stores';
 
 const NewTask: React.FC = () => {
   const {t} = useTranslation();

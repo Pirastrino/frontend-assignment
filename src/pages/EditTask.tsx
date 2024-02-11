@@ -5,7 +5,7 @@ import {FormTask, Layout} from '../components';
 import {MISSING_TEXT} from '../constants';
 import {taskData} from '../validations';
 import {useForm} from '../hooks';
-import {getTask, updateTask} from '../store';
+import {getTask, updateTask} from '../stores';
 
 const EditTask: React.FC = () => {
   const {t} = useTranslation();

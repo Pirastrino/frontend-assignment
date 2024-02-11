@@ -3,7 +3,7 @@ import {useTranslation} from 'react-i18next';
 import {Icon, IconButton, Menu, MenuButton, MenuItem, MenuList} from '@chakra-ui/react';
 
 import {Task} from '../types';
-import {removeTask} from '../store';
+import {removeTask} from '../stores';
 
 import {ReactComponent as IconMore} from '../assets/icons/icon-more.svg';
 import {ReactComponent as IconEdit} from '../assets/icons/icon-edit.svg';

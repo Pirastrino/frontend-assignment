@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/react';
 
 import {Layout, Task as TaskItem} from '../components';
-import {$tasks, toggleTaskCompleted} from '../store';
+import {$tasks, toggleTaskCompleted} from '../stores';
 import {formatDate} from '../utils';
 
 import logoBg from '../assets/logo-bg.svg';

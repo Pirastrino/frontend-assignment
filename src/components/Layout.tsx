@@ -1,8 +1,12 @@
+import {useEffect} from 'react';
+import {useNavigate} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 import {Helmet} from 'react-helmet-async';
 import {Box, Card, CardProps, Container} from '@chakra-ui/react';
 
 import TopBar from './TopBar';
+import {$user} from '../stores';
+import {validateToken} from '../api/login';
 
 type Props = CardProps & {
   children: React.ReactNode;
@@ -10,6 +14,18 @@ type Props = CardProps & {
 
 const Layout: React.FC<Props> = ({children, ...cardProps}) => {
   const {i18n, t} = useTranslation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // TODO: implement token expiration so that it does not tries to validate token on every page load
+    const token = $user.get()?.token;
+
+    validateToken(token, {
+      onError: () => {
+        navigate('/login');
+      },
+    });
+  }, []);
 
   return (
     <>
@@ -26,6 +42,7 @@ const Layout: React.FC<Props> = ({children, ...cardProps}) => {
       </Helmet>
       <Box height="100vh" width="100wv" bgColor="fill-gray">
         <Container maxW="1360px" px={{base: '.5rem', md: '2.5rem'}}>
+          {/* TODO: only for logged in users */}
           <TopBar />
           <Card variant="unstyled" w="full" bgColor="fill-white" margin="auto" {...cardProps}>
             {children}

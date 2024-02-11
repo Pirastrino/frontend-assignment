@@ -16,6 +16,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"],
-  "files": ["./@types/svg.d.ts"]
+  "include": ["src", "@types/environment.d.ts"],
+  "files": ["./@types/svg.d.ts", "./@types/env.d.ts"]
 }

@@ -1,6 +1,6 @@
 import {persistentAtom} from '@nanostores/persistent';
 
-import {Task} from './types';
+import {Task} from '../types';
 
 export const $tasks = persistentAtom<Task[]>('todos', [], {
   encode: JSON.stringify,

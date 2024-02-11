@@ -5,12 +5,19 @@ import {Button, CardBody, CardFooter, CardHeader, Heading, Text, VStack} from '@
 import {useForm} from '../hooks';
 import {Layout, FormInput} from '../components';
 import {loginData} from '../validations';
+import {login} from '../api/login';
 import {INVALID_CREDENTIALS} from '../constants';
 
 const Login: React.FC = () => {
   const {t} = useTranslation();
   const navigate = useNavigate();
-  const {values, errors, setErrors, handleChange, handleSubmit} = useForm({
+  const {
+    values,
+    errors,
+    setErrors,
+    handleChange,
+    handleSubmit: submit,
+  } = useForm({
     validationSchema: loginData,
     initialValues: {
       username: '',
@@ -18,24 +25,17 @@ const Login: React.FC = () => {
     },
   });
 
-  const onSubmit = async (data: typeof values) => {
-    fetch('https://dummyjson.com/auth/login', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(data),
+  const handleSubmit = submit((data) =>
+    login(data, {
+      onSuccess: () => navigate('/overview'),
+      onError: (error?: Error) => {
+        setErrors({
+          username: error?.message ?? INVALID_CREDENTIALS,
+          password: '',
+        });
+      },
     })
-      .then(async (res) => {
-        const response = await res.json();
-        if (!res.ok) {
-          return setErrors({
-            username: response?.message ?? INVALID_CREDENTIALS,
-            password: '',
-          });
-        }
-        navigate('/overview');
-      })
-      .then(console.log);
-  };
+  );
 
   return (
     <Layout maxW={560}>
@@ -45,7 +45,7 @@ const Login: React.FC = () => {
           <Text color="text-secondary">{t('login.description')}</Text>
         </VStack>
       </CardHeader>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit}>
         <CardBody>
           <VStack>
             <FormInput
