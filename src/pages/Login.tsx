@@ -2,21 +2,39 @@ import {useNavigate} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 import {Button, CardBody, CardFooter, CardHeader, Heading, Text, VStack} from '@chakra-ui/react';
 
+import {useForm} from '../hooks';
 import {Layout, FormInput} from '../components';
+import {loginData} from '../validations';
+import {INVALID_CREDENTIALS} from '../constants';
 
 const Login: React.FC = () => {
   const {t} = useTranslation();
   const navigate = useNavigate();
+  const {values, errors, setErrors, handleChange, handleSubmit} = useForm({
+    validationSchema: loginData,
+    initialValues: {
+      username: '',
+      password: '',
+    },
+  });
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const isLogged = true; // replace with actual login fn
-
-    if (isLogged) {
-      console.log('logged in');
-      return navigate('/overview');
-    }
+  const onSubmit = async (data: typeof values) => {
+    fetch('https://dummyjson.com/auth/login', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data),
+    })
+      .then(async (res) => {
+        const response = await res.json();
+        if (!res.ok) {
+          return setErrors({
+            username: response?.message ?? INVALID_CREDENTIALS,
+            password: '',
+          });
+        }
+        navigate('/overview');
+      })
+      .then(console.log);
   };
 
   return (
@@ -27,11 +45,28 @@ const Login: React.FC = () => {
           <Text color="text-secondary">{t('login.description')}</Text>
         </VStack>
       </CardHeader>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <CardBody>
           <VStack>
-            <FormInput id="name" name="name" label="Username" required />
-            <FormInput id="password" name="password" label="Password" type="password" required />
+            <FormInput
+              id="username"
+              name="username"
+              label="Username"
+              required
+              value={values.username}
+              errorMessage={errors.username}
+              onChange={handleChange}
+            />
+            <FormInput
+              id="password"
+              name="password"
+              label="Password"
+              type="password"
+              required
+              value={values.password}
+              errorMessage={errors.password}
+              onChange={handleChange}
+            />
           </VStack>
         </CardBody>
         <CardFooter>
