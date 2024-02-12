@@ -56,6 +56,7 @@ const Login: React.FC = () => {
               value={values.username}
               errorMessage={errors.username}
               onChange={handleChange}
+              autoFocus={values.username.length === 0 || errors.username.length > 0}
             />
             <FormInput
               id="password"

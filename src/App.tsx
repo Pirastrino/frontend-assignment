@@ -4,7 +4,6 @@ import {NewTask, Login, OverView, EditTask} from './pages';
 const App = () => (
   <Router>
     <Routes>
-      {/* implement auth */}
       <Route path="/" element={<Navigate to="/login" replace={true} />} />
       <Route path="/login" element={<Login />} />
       <Route path="/overview" element={<OverView />} />

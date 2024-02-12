@@ -68,6 +68,7 @@ const FormTask: React.FC<Props> = ({
               value={name}
               onChange={onChange}
               errorMessage={errors.name}
+              autoFocus={name.length === 0 || errors.name.length > 0}
             />
             <FormInput
               name="description"
