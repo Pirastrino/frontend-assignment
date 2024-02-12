@@ -8,6 +8,7 @@
 For a quick start follow these commands
 
 ```sh
+cp .env-sample .env
 npm install
 npm start
 ```
