@@ -1,6 +1,8 @@
 import {useState} from 'react';
 import {ZodError, ZodSchema} from 'zod';
 
+import {getInitialErrors, parseZodIssues} from '../utils/formatters';
+
 type Props<T> = {
   validationSchema: ZodSchema<any>;
   initialValues: T;
@@ -8,10 +10,7 @@ type Props<T> = {
 
 const useForm = <T extends object>({validationSchema, initialValues}: Props<T>) => {
   const [values, setValues] = useState(initialValues);
-  const [errors, setErrors] = useState(
-    // TODO: extract to getInitialErrors util function
-    Object.keys(initialValues).reduce((acc, key) => ({...acc, [key]: ''}), initialValues)
-  );
+  const [errors, setErrors] = useState(getInitialErrors(initialValues));
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (e) => {
     const {name, value} = e.currentTarget;
@@ -36,18 +35,8 @@ const useForm = <T extends object>({validationSchema, initialValues}: Props<T>) 
         reset();
       } catch (e) {
         if (e instanceof ZodError) {
-          setErrors(
-            // TODO: extract to the getErrors util function
-            Object.keys(errors).reduce(
-              (acc, key) => ({
-                ...acc,
-                [key]: (e as ZodError).errors.find((err) => err.path[0] === key)?.message ?? '',
-              }),
-              initialValues
-            )
-          );
+          setErrors(parseZodIssues(errors, e.errors));
         }
-
         // TODO: handle other errors with custom onError callback
       }
     };

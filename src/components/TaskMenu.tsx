@@ -8,7 +8,6 @@ import {removeTask} from '../stores';
 import {ReactComponent as IconMore} from '../assets/icons/icon-more.svg';
 import {ReactComponent as IconEdit} from '../assets/icons/icon-edit.svg';
 import {ReactComponent as IconDelete} from '../assets/icons/icon-delete.svg';
-import React from 'react';
 
 type Props = {
   id: Task['id'];
